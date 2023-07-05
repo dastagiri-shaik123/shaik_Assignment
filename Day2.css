@@ -1,0 +1,71 @@
+.grid-item:hover {
+    height: 60px;
+    width: 80px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto;
+    gap: 10px;
+    padding: 20px;
+    background-color: orange;
+}
+
+#table-container {
+    height: 280px;
+    margin: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+.hoverClass:hover {
+    font-size: 20px;
+    color: red;
+    font-family: Arial;
+    background-color: yellow;
+}
+
+tr:nth-child(even) {
+    background-color: magenta;
+}
+
+tr:nth-child(odd) {
+    background-color: cyan;
+}
+
+div:hover p {
+    display: block;
+}
+
+p {
+    display: none;
+    background-color: orangered;
+    padding: 20px;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-item  {
+    background-color: rgb(22, 144, 196);
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.flex-item::first-letter {
+    font-weight: bold;
+}
