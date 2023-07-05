@@ -15,11 +15,11 @@
 #table-container {
     height: 280px;
     margin: 20px;
-    overflow-x: auto;
+    overflow-x: scroll;
 }
 
 table {
-    width: 100px;
+    width: 1500px;
     border-collapse: collapse;
     text-align: center;
 }
@@ -59,7 +59,7 @@ p {
     display: flex;
 }
 
-.flex-item  {
+.flex-item {
     background-color: rgb(22, 144, 196);
     margin: 10px;
     padding: 20px;
@@ -67,5 +67,6 @@ p {
 }
 
 .flex-item::first-letter {
+    font-size: 50px;
     font-weight: bold;
 }
