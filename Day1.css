@@ -1,0 +1,19 @@
+input[type="button"] {
+    width: 70px;
+    background-color: blue;
+}
+
+.article {
+    width: 70px;
+    background-color: yellow;
+}
+
+.article2 {
+    font-style: italic;
+    font-weight: bold;
+}
+
+table {
+    border: double;
+    background-color: red;
+}
