@@ -1,15 +1,19 @@
-.grid-item:hover {
-    height: 60px;
-    width: 80px;
+.grid-item {
+    background-color: #e5db1f;
+    padding: 10px;
+    text-align: center;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto auto auto auto auto;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     gap: 10px;
-    padding: 20px;
-    background-color: orange;
+}
+
+.grid-item:hover {
+    width: 80%;
+    height: 80%;
 }
 
 #table-container {
@@ -45,14 +49,25 @@ tr:nth-child(odd) {
     background-color: cyan;
 }
 
-div:hover p {
-    display: block;
+.childClass {
+    position: relative;
 }
 
-p {
+.tooltip {
     display: none;
-    background-color: orangered;
-    padding: 20px;
+    position: absolute;
+    z-index: 100;
+    border: 1px;
+    background-color: white;
+    border: 1px solid green;
+    padding: 3px;
+    color: green;
+    top: 20px;
+    left: 20px;
+}
+
+.childClass:hover div.tooltip {
+    display: block;
 }
 
 .flex-container {

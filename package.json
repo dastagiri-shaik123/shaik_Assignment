@@ -1,0 +1,14 @@
+{
+  "name": "shaik_assignment",
+  "version": "1.0.0",
+  "description": "1. Create HTML page with 5 text elements and 4 buttons, create CSS class that will change background colors of Text elements and button elements as Yellow and Blue respectively\r 2. Create a  Paragraph in HTML and make the text contents of the paragraph as bold, italic using CSS\r 3. Create HTMl Table with Border as double and make all cells as red color",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.0"
+  }
+}
