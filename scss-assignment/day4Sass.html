@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="./../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <style>
+        .btn-primary {
+            background-color: yellow;
+            color: red;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border: 2px;
+            border-color: black;
+        }
+
+        @media screen and (max-width: 400px) {
+            .btn-primary {
+                border-radius: 50%;
+                background-color: gray;
+                color: blue;      
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn btn-primary">Button 1</button>
+    <button class="btn btn-primary">Button 2</button>
+    <button class="btn btn-primary">Button 3</button>
+    <button class="btn btn-primary">Button 4</button>
+    <hr/>
+</body>
+
+</html>
