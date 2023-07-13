@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./ajaxProductTable.js"></script>
+    <script>
+        var url = "https://catprdapi.azurewebsites.net/api/Product";
+        var existing;
+        $(document).ready(function () {
+
+            loadData();
+
+            $('#btnsave').on('click', function () {
+                save(existing ? $('#txtproduniqueid').val() : '');
+            })
+
+            $("#txtproduniqueid").on('change', function () {
+                loadDataById($(this).val());
+            });
+
+            $("#btndelete").on('click', function () {
+                remove();
+            });
+
+
+            $(document).on('click', '#btn-select', function () {
+                var rowData = [];
+                var row = $(this).closest('tr');
+                row.find('td').each(function () {
+                    rowData.push($(this).text());
+                });
+
+                loadDataById(rowData[0]);
+
+            });
+
+            $(document).on('click', '#btn-delete', function () {
+                var rowData = [];
+                var row = $(this).closest('tr');
+                row.find('td').each(function () {
+                    rowData.push($(this).text());
+                });
+
+                remove(rowData[0]);
+            });
+        });
+
+        function loadData() {
+            $.ajax({
+                url: url,
+                method: 'GET',
+            }).done(function (response) {
+
+                var table = generateTable(response, true);
+
+                $('#table-div').html(table);
+                $("#statusMessage").html('Call is successful');
+            }).fail(function (error) {
+                $("#statusMessage").html(`Call Failed ${error}`);
+            });
+        }
+
+        function loadDataById(id) {
+            $.ajax({
+                url: `${url}/${id}`,
+                method: 'GET'
+            }).done(function (response) {
+                if (response) {
+                    $("#txtproduniqueid").val(response.ProductUniqueId);
+                    $("#txtprodid").val(response.ProductId);
+                    $("#txtprodname").val(response.ProductName);
+                    $("#txtdescription").val(response.Description);
+                    $("#txtprice").val(response.Price);
+                    $("#txtcatid").val(response.CategoryId);
+                    $("#txtmanufacturer").val(response.Manufacturer);
+                    $("#statusMessage").html('Call is successful');
+                    existing = true;
+                }
+            }).fail(function (error) {
+                $("#statusMessage").html(`Call Failed ${error}`);
+            })
+        }
+
+
+        function save(id) {
+            var Product = {
+                "ProductId": $('#txtprodid').val(),
+                "ProductName": $('#txtprodname').val(),
+                "Description": $('#txtdescription').val(),
+                "Price": $('#txtprice').val(),
+                "CategoryId": $('#txtcatid').val(),
+                "Manufacturer": $('#txtmanufacturer').val()
+            };
+
+            $.ajax({
+                url: `${url}/${id ? id : ''}`,
+                method: id ? 'PUT' : 'POST',
+                data: JSON.stringify(Product),
+                contentType: 'application/json'
+            }).done(function (response) {
+                $('#statusMessage').html('Product creation is successful');
+                loadData();
+
+            }).fail(function (error) {
+                $('#statusMessage').html(`call failed ${error}`);
+
+            })
+        }
+
+        function remove(id) {
+            $.ajax({
+                url: `${url}/${id ? id : $('#txtproduniqueid').val()}`,
+                method: 'DELETE'
+            }).done(function (response) {
+                $("#statusMessage").html('Product is deleted successfully');
+                loadData();
+
+            }).fail(function (error) {
+                $("#statusMessage").html(`Call Failed ${error}`);
+
+            })
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1 class="text-center">Products Table with Ajax</h1>
+    <div class="container" style="background-color:rgb(238, 230, 227);">
+        <div class="group-group">
+            <label>ProductUniqueId :</label>
+            <input type="text" id="txtproduniqueid" class="form-control" placeholder="enter ProductUniqueId">
+        </div>
+        <div class="group-group">
+            <label>ProductId :</label>
+            <input type="text" id="txtprodid" class="form-control" placeholder="enter ProductId">
+        </div>
+        <div class="group-group">
+            <label>ProductName :</label>
+            <input type="text" id="txtprodname" class="form-control" placeholder="enter ProductName">
+        </div>
+        <div class="group-group">
+            <label>Description :</label>
+            <input type="text" id="txtdescription" class="form-control" placeholder="enter Description">
+        </div>
+        <div class="group-group">
+            <label>Price :</label>
+            <input type="text" id="txtprice" class="form-control" placeholder="enter Price">
+        </div>
+        <div class="group-group">
+            <label>CategoryId :</label>
+            <input type="text" id="txtcatid" class="form-control" placeholder="enter CategoryId">
+        </div>
+        <div class="group-group">
+            <label>Manufacturer :</label>
+            <input type="text" id="txtmanufacturer" class="form-control" placeholder="enter Manufacturer">
+        </div>
+
+        <div class="btn-group-lg text-center">
+
+            <button id="btnsave" class="btn btn-success p-1 m-2">Save/Update</button>
+
+            <button id="btndelete" class="btn btn-danger p-1">Delete</button>
+        </div>
+    </div>
+    <br>
+    <div class="container alert alert-success">
+        <strong>
+            <p id="statusMessage"></p>
+        </strong>
+    </div>
+    <hr>
+    <h1 class="text-center m-3 p-3">Product Details</h1>
+
+    <div class="p-3 m-3" id="table-div"></div>
+</body>
+
+</html>
